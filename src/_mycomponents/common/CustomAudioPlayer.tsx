@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./CustomAudioPlayer.css";
 import { Pause, Play } from "lucide-react";
+
 const CustomAudioPlayer: React.FC<{ audioUrl: string }> = ({ audioUrl }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -41,23 +42,20 @@ const CustomAudioPlayer: React.FC<{ audioUrl: string }> = ({ audioUrl }) => {
     }
   };
 
-  // Handle volume change
-
   return (
     <div className="audio-player w-[70%]">
       <audio
         ref={audioRef}
-        src={audioUrl} // Replace with your audio file URL
+        src={audioUrl}
         onTimeUpdate={handleTimeUpdate}
         preload="none"
         onLoadedMetadata={handleLoadedMetadata}
         style={{ display: "none" }}
         controls
-        download={false}
       ></audio>
       {/* Play/Pause Button */}
       <button
-        className="dark:text-gray-100 text-gray-600 "
+        className="dark:text-gray-100 text-gray-600"
         onClick={togglePlay}
       >
         {isPlaying ? <Pause /> : <Play />}
@@ -71,9 +69,8 @@ const CustomAudioPlayer: React.FC<{ audioUrl: string }> = ({ audioUrl }) => {
         step="0.1"
         onChange={handleSeek}
       />
-
       {/* Current Time and Duration */}
-      <div className="text-gray-600  dark:text-gray-100">
+      <div className="text-gray-600 dark:text-gray-100">
         {new Date(currentTime * 1000).toISOString().substring(14, 19)}
       </div>
     </div>
