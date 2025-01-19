@@ -12,11 +12,13 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import CustomAudioPlayer from "./CustomAudioPlayer";
+
 export type SelectionType = {
   value: string;
   name: string;
   audioUrl?: string;
 };
+
 function SelectField({ fieldName, label, options, control }: any) {
   return (
     <FormField
@@ -34,6 +36,7 @@ function SelectField({ fieldName, label, options, control }: any) {
                 {options.map((option: SelectionType) =>
                   option.audioUrl ? (
                     <div
+                      key={option.value} // Added key prop here
                       className={`flex items-center justify-between gap-2 px-1 py-2  rounded ${
                         field.value === option.value
                           ? "bg-[#101d3b]"
@@ -41,7 +44,7 @@ function SelectField({ fieldName, label, options, control }: any) {
                       }`}
                     >
                       <button
-                        className="flex-1 text-left  "
+                        className="flex-1 text-left"
                         onClick={() => {
                           field.onChange(option.value);
                         }}
